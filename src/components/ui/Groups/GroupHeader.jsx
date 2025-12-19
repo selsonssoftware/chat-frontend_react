@@ -31,7 +31,7 @@ const GroupHeader = () => {
       <div className="nochatbg flex items-center inter-large  justify-between border-b border-gray-300">
         <button
           onClick={() => setOpen(true)}
-          className="flex cursor-pointer w-full items-center gap-4 p-3  transition"
+          className="flex cursor-pointer  w-full items-center gap-4 p-3 opacity-100 hover:opacity-50  "
         >
           <img
             src={
@@ -57,7 +57,7 @@ const GroupHeader = () => {
             setSelectedUser(null);
             setSelectedGroupId(null);
           }}
-          className="mr-4 text-black hover:text-gray-600 transition"
+          className="mr-4 text-black hover:text-gray-600 cursor-pointer"
         >
           <X />
         </button>
