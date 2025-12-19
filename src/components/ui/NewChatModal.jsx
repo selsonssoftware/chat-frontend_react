@@ -35,15 +35,23 @@ export default function NewChatModal({ open, onClose }) {
   const groupImage =
     "https://t4.ftcdn.net/jpg/03/26/08/53/360_F_326085309_CFH8PpadfnL2OQ7Gi411XW0B21YumxKo.jpg";
 
-  const filteredUsers = useMemo(() => {
-    const q = search.toLowerCase().trim();
-    if (!q) return Array.isArray(allUsers) ? allUsers : [];
-    return allUsers.filter(
-      (u) =>
+const filteredUsers = useMemo(() => {
+  if (!Array.isArray(allUsers)) return [];
+
+  const q = search.toLowerCase().trim();
+
+  return allUsers
+    // ❌ remove auth user
+    .filter((u) => u.user_id !== authUser?.user_id)
+    // 🔍 apply search
+    .filter((u) => {
+      if (!q) return true;
+      return (
         u.name.toLowerCase().includes(q) ||
         u.email.toLowerCase().includes(q)
-    );
-  }, [search, allUsers]);
+      );
+    });
+}, [search, allUsers, authUser?.user_id]);
 
 
   

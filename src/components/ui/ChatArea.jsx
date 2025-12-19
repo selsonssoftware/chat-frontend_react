@@ -53,8 +53,8 @@ const ChatArea = () => {
 
   if (isMessagesLoading) {
     return (
-      <div className="flex-1 flex items-center justify-center">
-        <span className="loading loading-spinner loading-lg"></span>
+      <div className="flex-1 flex mt-30 text-black items-center justify-center">
+        <span className="loading text-black loading-spinner loading-lg"></span>
       </div>
     );
   }

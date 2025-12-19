@@ -8,7 +8,10 @@ dayjs.extend(relativeTime);
 
 const DEFAULT_AVATAR =
     "https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg";
-
+const truncateText = (name, maxChars = 30) => {
+    if (!name) return "";
+    return name.length <= maxChars ? name : name.slice(0, maxChars) + "...";
+  };
 const RecentChats = () => {
     const {
         sidebarRecentChats,
@@ -75,7 +78,7 @@ const RecentChats = () => {
 
                             <p className="text-sm text-gray-500 truncate">
                                 {/* {lastMessage?.message_text || "No messages yet"} */}
-                                {authUser.user_id===chat.ChatMessages?.[0]?.user_id ? `You : ${lastMessage?.message_text}` : lastMessage?.message_text}
+                                {authUser.user_id===chat.ChatMessages?.[0]?.user_id ? `You : ${truncateText(lastMessage?.message_text)}` : truncateText(lastMessage?.message_text)}
                             </p>
                         </div>
                     </button>

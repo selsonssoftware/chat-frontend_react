@@ -9,6 +9,8 @@ import { Link } from "react-router-dom";
 import OnlineUsersSidebar from "./OnlineUsersSlider.jsx";
 import { useAuthStore } from "../store/useAuthStore.js";
 import RecentChats from "./ui/RecentChats.jsx";
+import { useChatStore } from "../store/useChatStore.js";
+import RecentGroup from "./ui/Groups/RecentGroup.jsx";
 
 const chats = [
   { id: 1, name: "Regis Saffi", last: "Checkout this project" },
@@ -21,6 +23,9 @@ export default function Sidebar({ onSelect }) {
   const [open, setOpen] = useState(false);
   const [openProfile, setOpenProfile] = useState(false);
   const [query, setQuery] = useState("");
+  const {isAllUsersRecentSelected,setIsAllUsersRecentSelected} = useChatStore();
+
+   
   return (
     <div className="h-full flex flex-col inter-large text-[#383838] border-gray-300 border-r-1">
         <div className="flex flex-row items-center justify-between p-4 font-semibold border-b bg-[#f3f4ff] border-gray-300 inter-very-large text-2xl">
@@ -32,8 +37,8 @@ export default function Sidebar({ onSelect }) {
       <SearchSidebar value={query} onChange={setQuery} />
       <div className="flex justify-between h-11 mb-2 items-center">
         <div className="flex flex-row">
-          <Selector label={'All'} />
-          <Selector label={'Groups'} />
+          <button onClick={()=>{setIsAllUsersRecentSelected("all")}}><Selector label={'All'} /></button>
+          <button onClick={()=>{setIsAllUsersRecentSelected("group")}}><Selector label={'Groups'} /></button>
         </div>
         <button onClick={() => setOpen(true)} className="px-5 bg-[#6200B3] text-white inline-flex whitespace-nowrap items-center justify-center text-sm py-[5px] ml-3 mt-3 rounded-xl cursor-pointer hover:bg-[#420078]  border-[#6200B3] hover:border-[#420078] border-[1.9px] gap-2 mr-3">New Chat / Group <PencilLine size={16} className=""/></button>
         
@@ -87,7 +92,8 @@ export default function Sidebar({ onSelect }) {
         ))}
       </div> */}
       <div className="flex-1 overflow-y-auto">
-        <RecentChats />
+        {isAllUsersRecentSelected === "all" ? <RecentChats /> : <RecentGroup /> }
+        
       </div>
     </div>
   );

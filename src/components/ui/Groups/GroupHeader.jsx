@@ -14,12 +14,12 @@ const GroupHeader = () => {
     selectedGroupId
   } = useChatStore();
 
-  console.log("group info",groupInfo)
+  console.log("group info", groupInfo)
 
-  useEffect(()=>{
+  useEffect(() => {
     setGroupInfo();
-  },[selectedGroupId])
-  
+  }, [selectedGroupId])
+
   if (!groupInfo) return (
     <div>
       fetching group details
@@ -27,8 +27,20 @@ const GroupHeader = () => {
   );
 
   return (
-    <div className="nochatbg text-main flex justify-between border-b border-gray-300">
-      <div className="flex p-3 gap-4 items-center">
+    <div className="nochatbg text-main flex justify-between border-b border-gray-300  transition duration-100  opacity-100 hover:opacity-60">
+      
+      <dialog id="my_modal_3" className="modal">
+        <div className="modal-box">
+          <form method="dialog">
+            {/* if there is a button in form, it will close the modal */}
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+          </form>
+          <h3 className="font-bold text-lg">Hello!</h3>
+          <p className="py-4">Press ESC key or click on ✕ button to close</p>
+        </div>
+      </dialog>
+      <button onClick={() => document.getElementById('my_modal_3').showModal()} className="cursor-pointer w-full flex p-3 gap-4 items-center">
+        
         <img
           src={
             groupInfo.group_image ||
@@ -39,27 +51,27 @@ const GroupHeader = () => {
         />
 
         <div className="flex flex-col">
-          <h2 className="text-sm font-semibold text-black">
+          <h2 className="text-sm text-left font-semibold text-black ">
             {groupInfo.group_name}
           </h2>
 
-          
 
-          <div className="text-xs text-gray-500 flex flex-row">
-            Members: 
-            {groupInfo.chat_users.map((item)=>(
+
+          <div className="text-xs text-left text-gray-500 flex flex-row">
+            Click to View Details
+            {/* {groupInfo.chat_users.map((item) => (
               <p>{item.user.name},</p>
-            ))}
+            ))} */}
           </div>
         </div>
-      </div>
+      </button>
 
       <button
         onClick={() => {
           setSelectedUser(null);
           setSelectedGroupId(null);
         }}
-        className="mr-4 text-black hover:text-gray-600"
+        className="mr-4 cursor-pointer text-black hover:text-gray-600"
       >
         <X />
       </button>

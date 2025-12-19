@@ -17,8 +17,18 @@ export const useChatStore = create((set, get) => ({
   groupInfo: null,
   isFetchingGroupInfo: false,
   isFetchingRecentChats: false,
+  isFetchingRecentGroups: false,
   sidebarRecentChats : null,
+  sidebarRecentGroups: null,
   isUploadingFile: false,
+  isAllUsersRecentSelected: "all",
+
+
+
+
+  setIsAllUsersRecentSelected: async (type) => {
+    set({isAllUsersRecentSelected: type});
+  },
 
   emitTyping: () => {
     const socket = useAuthStore.getState().socket;
@@ -98,8 +108,10 @@ export const useChatStore = create((set, get) => ({
     }
   },
 
-  setSelectedGroupId: async ({selectedGroupId}) => {
-    set({selectedGroupId: selectedGroupId})
+  setSelectedGroupId: async (selectedGroupId) => {
+    set({selectedUser: null})
+    console.log("selected group id: ",selectedGroupId)
+    set({selectedGroupId: selectedGroupId});
   },
 
   getUsers: async () => {
@@ -258,6 +270,28 @@ sendMessage: async (payload) => {
     }
   },
 
+
+  fetchRecentGroups : async () => {
+    set({isFetchingRecentGroups: true});
+
+    try {
+      const authUser = useAuthStore.getState().authUser;
+
+      if(!authUser?.user_id) {
+        console.warn("No auth user, skipping recent chats fetch");
+        return;
+      }
+
+      const res = await axiosInstance.get(`/chat/groupsidebar?user_id=${authUser.user_id}`);
+
+      set({sidebarRecentGroups: res.data.groupChatList});
+
+    } catch (error) {
+      console.log("Error in fetching recent groups:", error);
+    } finally {
+      set({ isFetchingRecentGroups: false });
+    }
+  },
 
   fetchRecentChats: async () => {
     set({ isFetchingRecentChats: true });
