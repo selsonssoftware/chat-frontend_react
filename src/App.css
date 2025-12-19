@@ -68,6 +68,9 @@ body.light {
     --success: oklch(0.5 0.05 160);
     --info: oklch(0.5 0.05 260);
 }
+
+
+
 .bg-surface {
     background-color: var(--bg);
 }

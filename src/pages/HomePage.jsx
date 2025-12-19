@@ -9,6 +9,8 @@ import Sidebar from "../components/Sidebar.jsx";
 import ChatWindow from "../components/ChatWindow.jsx";
 import { MessageSquareHeart } from 'lucide-react';
 import GroupWindow from "../components/GroupWindow.jsx";
+import GroupInfoPageAdmin from "../components/ui/Groups/GroupInfoModalAdmin.jsx";
+import GroupInfoPageMember from "../components/ui/Groups/GroupInfoModalMember.jsx";
 
 
 
@@ -45,6 +47,7 @@ export default function HomePage() {
         ) : (
           null
         )}
+
 
         {(selectedUser === null && selectedGroupId === null) ? (
           <div className="flex items-center justify-center gap-3 w-full text-gray-400 nochatbg flex-col">
