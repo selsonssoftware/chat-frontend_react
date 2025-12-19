@@ -156,14 +156,14 @@ const GroupHeader = () => {
               {groupInfo?.chat_users.map((user) => (
                 <div
                   key={user.user_id}
-                  className="flex items-center gap-3 p-2 rounded-md hover:bg-gray-100"
+                  className="border-b-2 border-[#ebebeb68] flex items-center gap-3 p-2 rounded-md hover:bg-gray-100"
                 >
                   <img
                     src={user.user.profile}
                     className="h-8 w-8 rounded-full object-cover"
                     alt={user.user.name}
                   />
-                  <div className="flex flex-col">
+                  <div className="flex flex-row justify-between w-full ">
                     <p className="text-sm font-medium text-black">
                       {user.user.name}
                     </p>

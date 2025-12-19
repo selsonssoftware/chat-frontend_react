@@ -133,8 +133,8 @@ const ChatArea = () => {
             <div
               className={`chat-bubble rounded-xl ${
                 isMine
-                  ? "bg-[#6200B3] text-white"
-                  : "bg-white text-[#6200B3]"
+                  ? "bg-[#6200B3] text-white shadow-2xl"
+                  : "bg-white text-[#6200B3] shadow-4xl"
               }`}
             >
               {/* Image Message */}
@@ -203,7 +203,7 @@ const ChatArea = () => {
       )}
 
       <div ref={bottomRef} />
-    </div>
+    </div >
   );
 };
 
